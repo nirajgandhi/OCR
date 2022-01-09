@@ -3,12 +3,14 @@ import cv2
 import glob
 import pytesseract 
 from shutil import copy
+from shutil import move
 import os
 
 # Mention the installed location of Tesseract-OCR in your system 
 pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract.exe'
 
-for i_file in glob.glob("C:/Users/nxa18346/Documents/OCR/*.jpg"):
+'''
+for i_file in glob.glob("C:/Users/nxa18346/Documents/OCR/B/*.jpg"):
     # Read image from which text needs to be extracted 
     img = cv2.imread(i_file) 
     #print("Image:")
@@ -71,12 +73,16 @@ for i_file in glob.glob("C:/Users/nxa18346/Documents/OCR/*.jpg"):
         file.close 
 
 # Copy image to new folder if particular text matched
-text_to_search = 'Rajkot'
+'''
+text_to_search = ['1991','1992','1993','1994','1995','Rajkot']
 if not os.path.exists('Sorted_B'):
     os.makedirs('Sorted_B')
-for t_file in glob.glob("C:/Users/nxa18346/Documents/OCR/*.txt"):
+for t_file in glob.glob("C:/Users/nxa18346/Documents/OCR/B/*.txt"):
     c_file = os.path.splitext(t_file)[0]
     #print(c_file)
     with open(t_file) as f:
-        if text_to_search in f.read():
-            copy(c_file, 'Sorted_B')
+        for t in text_to_search:
+            if t in f.read() and os.path.exists(c_file):
+                move(c_file, 'Sorted_B')
+
+

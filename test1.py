@@ -74,15 +74,16 @@ for i_file in glob.glob("C:/Users/nxa18346/Documents/OCR/B/*.jpg"):
 
 # Copy image to new folder if particular text matched
 '''
-text_to_search = ['1991','1992','1993','1994','1995','Rajkot']
+text_to_search = ['1991','1992','1993','1994','1995','1996','Rajkot']
 if not os.path.exists('Sorted_B'):
     os.makedirs('Sorted_B')
 for t_file in glob.glob("C:/Users/nxa18346/Documents/OCR/B/*.txt"):
     c_file = os.path.splitext(t_file)[0]
     #print(c_file)
-    with open(t_file) as f:
-        for t in text_to_search:
+    for t in text_to_search:
+        with open(t_file) as f:
             if t in f.read() and os.path.exists(c_file):
-                move(c_file, 'Sorted_B')
+                print(t)
+                copy(c_file, 'Sorted_B')
 
 
